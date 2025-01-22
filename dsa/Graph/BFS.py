@@ -1,36 +1,59 @@
 from collections import deque
-def BFS(tree,start):
-    visited=[]
-    queue = deque([start])
-    while queue :
-        node = queue.popleft()
-        if node not in visited:
-            visited.append(node)
-            print(node,end=' ')
 
-            for neighbor in tree[node]:
-                if neighbor not in visited:
-                    queue.append(neighbor)
+class Graph:
+    def __init__(self, vno):
+        self.vertex_count = vno
+        self.adj_list = {v: [] for v in range(vno)}
 
+    def add_edge(self, u, v, weight=1):
+        if 0 <= u < self.vertex_count and 0 <= v < self.vertex_count:
+            self.adj_list[u].append((v, weight))
+            self.adj_list[v].append((u, weight))
+        else:
+            print("Invalid vertices")
 
+    def remove_edge(self, u, v):
+        if 0 <= u < self.vertex_count and 0 <= v < self.vertex_count:
+            self.adj_list[u] = [(vertex, weight) for vertex, weight in self.adj_list[u] if vertex != v]
+            self.adj_list[v] = [(vertex, weight) for vertex, weight in self.adj_list[v] if vertex != u]
+        else:
+            print("Invalid vertices")
 
-# Define the decision tree as a dictionary
-tree = {
-    # 'A': ['B', 'C'],  # Node A connects to B and C
-    # 'B': ['D', 'E'],  # Node B connects to D and E
-    # 'C': ['F', 'G'],  # Node C connects to F and G
-    # 'D': ['H', 'I'],  # Node D connects to H and I
-    # 'E': ['J', 'K'],  # Node E connects to J and K
-    # 'F': ['L', 'M'],  # Node F connects to L and M
-    # 'G': ['N', 'O'],  # Node G connects to N and O
-    # 'H': [], 'I': [], 'J': [], 'K': [],  # Leaf nodes have no children
-    # 'L': [], 'M': [], 'N': [], 'O': []   # Leaf nodes have no children
-    'A':['B','C'],
-    'B':['A','C','D'],
-    'C':['A','B','D','E'],
-    'D':['B','C','E','F'],
-    'E':['C','D','F'],
-    'F':['D','E']
-}
+    def has_edge(self, u, v):
+        if 0 <= u < self.vertex_count and 0 <= v < self.vertex_count:
+            return any(vertex == v for vertex, weight in self.adj_list[u])
+        return False
 
-BFS(tree,'A')
+    def print_adj_list(self):
+        for vertex, neighbors in self.adj_list.items():
+            print(f"V{vertex} : {neighbors}")
+
+    def bfs(self, start):
+        if start < 0 or start >= self.vertex_count:
+            print("Invalid start vertex")
+            return
+
+        visited = []
+        queue = deque([start])
+
+        while queue:
+            node = queue.popleft()
+            if node not in visited:
+                visited.append(node)
+                print(node, end=" ")
+
+                for neighbor, _ in self.adj_list[node]:
+                    if neighbor not in visited:
+                        queue.append(neighbor)
+
+# Example Usage
+g = Graph(5)
+g.add_edge(0, 1)
+g.add_edge(1, 2)
+g.add_edge(1, 3)
+g.add_edge(2, 4)
+g.add_edge(3, 4)
+g.print_adj_list()
+
+print("BFS Traversal:")
+g.bfs(0)
