@@ -1,6 +1,7 @@
 """ Implementing sliding window """
 """ Time complexity : O(N) """
 """ Space complexity : O(1)  """
+""" Reference : https://medium.com/@rishu__2701/mastering-sliding-window-techniques-48f819194fd7 """
 class Solution :
     def max_subarray_sum(self,nums:list[int],k:int):
         max_sum = float('-inf')
