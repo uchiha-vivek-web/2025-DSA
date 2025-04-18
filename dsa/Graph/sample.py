@@ -15,7 +15,7 @@ class Graph:
     
     def print_adj_list(self):
         for vertex,neighbor in self.adj_list.items():
-            print(f'V {vertex} : {neighbor}')
+            print(f'V {vertex} :t {neighbor}')
 
 
 g = Graph(5)
