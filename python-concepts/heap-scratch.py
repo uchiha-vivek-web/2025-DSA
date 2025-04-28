@@ -70,4 +70,4 @@ class Heap:
     def heapifyUpr(self,index):
         if(self.hasParent(index) and self.parent(index)>self.storage[index]):
             self.swap(self.getParentIndex(index),index)
-            self.heapifyUpr(self.getParentIndex(index)
+            self.heapifyUpr(self.getParentIndex(index))
