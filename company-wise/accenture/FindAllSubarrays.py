@@ -1,5 +1,4 @@
 """ Find all subarrays in an array """
-
 class Soloution:
     def AllSubarrays(self,nums:list[int]) -> list :
         n:int=len(nums)
