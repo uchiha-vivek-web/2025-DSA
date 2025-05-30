@@ -33,3 +33,9 @@ if __name__=="__main__":
     obstacleGrid:List[List[int]] = [[0,0,0],[0,1,0],[0,0,0]]
     ans = sol.uniquePathsWithObstacles(obstacleGrid)
     print(ans)
+
+
+
+# upcoming problems
+# unique path 3
+# path whose matrix sum is divisible by 3
